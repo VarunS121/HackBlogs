@@ -6,9 +6,11 @@ require('./db/psql')
 const port = process.env.PORT || 5000
 
 const blogRouter = require('./routes/blogRoutes')
+const userRouter = require('./routes/userRoutes')
 
 app.use(express.json())
 app.use('/', blogRouter)
+app.use('/user', userRouter)
 
 app.use(function (req, res) {
   res.status(404).json({ msg: 'URL Not Found' })

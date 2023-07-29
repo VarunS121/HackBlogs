@@ -10,6 +10,7 @@
 //psql models
 const { Sequelize, DataTypes, Model } = require('sequelize')
 const sequelize = require('../db/psql')
+const User = require('./User')
 
 class Blog extends Model {}
 
@@ -31,4 +32,14 @@ Blog.init(
   { sequelize, modelName: 'Blog', tableName: 'Blogs' }
 )
 
+Blog.belongsTo(User, {
+  foreignKey: {
+    allowNull: false,
+  },
+  as: 'author',
+})
+// ;(async () => {
+//   await sequelize.sync({ force: true })
+//   console.log('Synced DB')
+// })()
 module.exports = Blog
