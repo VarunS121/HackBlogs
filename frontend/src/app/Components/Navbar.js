@@ -17,14 +17,14 @@ const Navbar = () => {
         <li className="grow ml-10 w-40 relative">
           <Image src="/b-logo.png" width="140" height="140"></Image>
         </li>
-        <li className="text-black text-center flex-none m-auto w-32">
-          <Link href="#">Home</Link>
+        <li className="text-black text-center flex-none m-auto w-28">
+          <Link href="/">Home</Link>
         </li>
         <li className="text-black text-center flex-none m-auto w-32">
           <Link href="#">Write</Link>
         </li>
         <li className="flex-none m-auto w-32">
-          <Button text="Login" bgColor="bg-[#ae2929]" href="#" />
+          <Button text="Login" bgColor="bg-[#ae2929]" href="/login" />
         </li>
       </ul>
     </div>
