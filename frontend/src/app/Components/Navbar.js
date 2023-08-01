@@ -15,7 +15,9 @@ const Navbar = () => {
     >
       <ul className="flex flex-row content-center">
         <li className="grow ml-10 w-40 relative">
-          <Image src="/b-logo.png" width="140" height="140"></Image>
+          <Link href={'/'}>
+            <Image src="/b-logo.png" width="140" height="140"></Image>
+          </Link>
         </li>
         <li className="text-black text-center flex-none m-auto w-28">
           <Link href="/">Home</Link>

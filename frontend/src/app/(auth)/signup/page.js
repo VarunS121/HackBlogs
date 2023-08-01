@@ -15,31 +15,19 @@ const Login = () => {
       <Navbar />
       <h1 className="pt-36 text-5xl text-center mx-auto">Join HackBlogs!</h1>
       <div className="text-center mx-auto mt-14">
-        <InputField
-          label="Email"
-          type="text"
-          onChange={(e) => console.log(e.target.value)}
-        />
+        <InputField label="Email" type="text" onChange={onChange} />
       </div>
       <div className="text-center mx-auto mt-14">
-        <InputField
-          label="Username"
-          type="text"
-          onChange={(e) => console.log(e.target.value)}
-        />
+        <InputField label="Username" type="text" onChange={onChange} />
       </div>
       <div className="text-center mx-auto mt-14">
-        <InputField
-          label="Password"
-          type="password"
-          onChange={(e) => console.log(e.target.value)}
-        />
+        <InputField label="Password" type="password" onChange={onChange} />
       </div>
       <div className="text-center mx-auto mt-14">
         <InputField
           label="Confirm Password"
           type="password"
-          onChange={(e) => console.log(e.target.value)}
+          onChange={onChange}
         />
       </div>
       <div className="text-center mx-auto">
