@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 // const mongoose = require('mongoose')
 const app = express()
 require('dotenv').config()
@@ -8,6 +9,11 @@ const port = process.env.PORT || 5000
 const blogRouter = require('./routes/blogRoutes')
 const userRouter = require('./routes/userRoutes')
 
+app.use(
+  cors({
+    origin: '*',
+  })
+)
 app.use(express.json())
 app.use('/', blogRouter)
 app.use('/user', userRouter)

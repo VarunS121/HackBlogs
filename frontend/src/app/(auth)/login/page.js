@@ -4,35 +4,64 @@ import Navbar from '@/app/Components/Navbar'
 import InputField from '@/app/Components/InputField'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useState } from 'react'
+import axios from 'axios'
 
-const SignUp = () => {
-  const onChange = (e) => {
-    console.log(e.target.value)
+const Login = () => {
+  const [credentials, setCred] = useState({
+      userCred: '',
+      password: '',
+    }),
+    [valid, setValid] = useState(true)
+
+  const handleClick = () => {
+    if (!credentials.userCred || !credentials.password) {
+      setValid(false)
+    } else {
+      setValid(true)
+      axios
+        .post('http://localhost:8000/user/login/', { ...credentials })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
+    }
   }
 
   return (
     <main className="bg-[#202020] min-h-screen">
       <Navbar />
       <h1 className="pt-36 text-5xl text-center mx-auto">Welcome back!</h1>
+      {!valid && (
+        <div className=" border-red-700 border-2 text-red-700 text-center mx-auto mt-6 w-64">
+          Both the fields are Required
+        </div>
+      )}
       <div className="text-center mx-auto mt-14">
         <InputField
           label="Email / Username"
           type="text"
-          onChange={(e) => console.log(e.target.value)}
+          onChange={(e) => {
+            setCred({ ...credentials, userCred: e.target.value })
+          }}
         />
       </div>
       <div className="text-center mx-auto mt-14">
         <InputField
           label="Password"
           type="password"
-          onChange={(e) => console.log(e.target.value)}
+          onChange={(e) =>
+            setCred({ ...credentials, password: e.target.value })
+          }
         />
       </div>
       <div className="text-right mx-[37rem] mt-6">
         <Link href={'#'}>Forgot Password?</Link>
       </div>
       <div className="text-center mx-auto">
-        <button className=" rounded-full h-11 bg-[#ae2929] w-52 text-xl mt-6">
+        <button
+          type="submit"
+          onClick={handleClick}
+          className=" rounded-full h-11 bg-[#ae2929] w-52 text-xl mt-6"
+        >
           Login
         </button>
       </div>
@@ -64,4 +93,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default Login

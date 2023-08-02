@@ -15,7 +15,7 @@ User.init(
       allowNull: false,
       unique: true,
       validate: {
-        is: /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/i,
+        is: /^[A-Za-z][A-Za-z0-9_.]{7,29}$/,
       },
     },
     email: {
