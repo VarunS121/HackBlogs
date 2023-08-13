@@ -14,6 +14,10 @@ const SignUp = () => {
     /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@$!%*#?&])[A-Za-z0-9@$!%*#?&]{8,}$/
   )
 
+  const [postError, setPostError] = useState({
+    status: false,
+    msg: '',
+  })
   const [valid, setValid] = useState(false)
   const [credentials, setCred] = useState({
     email: '',
@@ -102,8 +106,30 @@ const SignUp = () => {
         email: credentials.email,
         password: credentials.password,
       })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err))
+      .then((res) => {
+        console.log(res)
+        if (res.status == 200) {
+          setPostError({ status: false, msg: 'User Created Successfully!!' })
+          window.scrollTo({ top: 0 })
+        } else {
+          alert('Something went wrong')
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+        if (err.response.status === 404) {
+          setPostError({
+            status: true,
+            msg: 'User already exists!',
+          })
+        } else {
+          setPostError({
+            status: true,
+            msg: 'Something Went Wrong!',
+          })
+        }
+        window.scrollTo({ top: 0 })
+      })
   }
 
   useEffect(() => {
@@ -121,17 +147,22 @@ const SignUp = () => {
     } else {
       setValid(true)
     }
-    console.log(valid)
   })
-
-  useEffect(() => {
-    console.log(credentials)
-  }, [credentials])
 
   return (
     <main className="bg-[#202020] min-h-screen">
       <Navbar />
       <h1 className="pt-36 text-5xl text-center mx-auto">Join HackBlogs!</h1>
+      {postError.status && (
+        <div className=" border-red-700 border-2 text-red-700 text-center mx-auto mt-6 w-64 text-xl">
+          {postError.msg}
+        </div>
+      )}
+      {!postError.status && postError.msg && (
+        <div className=" border-green-500 border-2 text-green-500 text-center mx-auto mt-6 w-64 text-xl">
+          {postError.msg}
+        </div>
+      )}
       <div className="text-center mx-auto mt-14">
         <InputField
           label="Email"
@@ -204,6 +235,7 @@ const SignUp = () => {
               width={'37'}
               height={'37'}
               className=" scale-75 mx-4"
+              alt="Google Logo"
             />
             <p className="text-center my-auto">SignIn with Google</p>
           </div>

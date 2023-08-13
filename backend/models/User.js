@@ -30,6 +30,11 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
   },
   { sequelize, modelName: 'User', tableName: 'Users' }
 )

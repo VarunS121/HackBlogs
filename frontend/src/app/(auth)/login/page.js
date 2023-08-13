@@ -6,8 +6,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 const Login = () => {
+  const router = useRouter()
+  const [postError, setPostError] = useState({
+    status: false,
+    msg: '',
+  })
   const [credentials, setCred] = useState({
       userCred: '',
       password: '',
@@ -21,8 +27,20 @@ const Login = () => {
       setValid(true)
       axios
         .post('http://localhost:8000/user/login/', { ...credentials })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err))
+        .then((res) => {
+          console.log(res)
+          if (res.status === 200) {
+            setPostError({
+              status: false,
+              msg: 'User Logged In Successfully!!',
+            })
+            wait(100)
+            router.push('/')
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 
@@ -33,6 +51,11 @@ const Login = () => {
       {!valid && (
         <div className=" border-red-700 border-2 text-red-700 text-center mx-auto mt-6 w-64">
           Both the fields are Required
+        </div>
+      )}
+      {!postError.status && postError.msg && (
+        <div className=" border-green-500 border-2 text-green-500 text-center mx-auto mt-6 w-64 text-xl">
+          {postError.msg}
         </div>
       )}
       <div className="text-center mx-auto mt-14">
