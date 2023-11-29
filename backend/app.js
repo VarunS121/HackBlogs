@@ -3,7 +3,7 @@ const cors = require('cors')
 // const mongoose = require('mongoose')
 const app = express()
 require('dotenv').config()
-require('./db/psql')
+// require('./db/psql')
 const port = process.env.PORT || 5000
 
 const blogRouter = require('./routes/blogRoutes')
