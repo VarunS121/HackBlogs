@@ -28,6 +28,11 @@ Blog.init(
       type: DataTypes.DATEONLY,
       defaultValue: DataTypes.NOW,
     },
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
   },
   { sequelize, modelName: 'Blog', tableName: 'Blogs' }
 )
