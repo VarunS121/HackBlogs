@@ -43,8 +43,11 @@ Blog.belongsTo(User, {
   },
   as: 'author',
 })
+
+// DATABASE SETUP COMMANDS
 // ;(async () => {
 //   await sequelize.sync({ force: true })
 //   console.log('Synced DB')
 // })()
+
 module.exports = Blog
